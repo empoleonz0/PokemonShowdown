@@ -36,3 +36,9 @@ class Charizard extends Pokemon {
         super(6, 'Charizard', ['Fire','Flying'], [78, 84, 78, 109, 85, 100], level, evs, ivs, ['Fire Blast','Air Slash'], moves, ['Blaze','Solar Power'], ability)
     }
 }
+
+module.exports = {
+    Pokemon,
+    Venusaur,
+    Charizard,
+}

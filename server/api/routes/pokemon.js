@@ -5,8 +5,9 @@ const { Pokemon, Venusaur, Charizard } = require('../../pokemon')
 app.get('/venusaur', async(req, res, next)=>{
     try{
         const venusaur = new Venusaur(100, [4, 0, 0, 252, 0, 252], [31, 31, 31, 31, 31, 31], ['Sludge Bomb'], ['Overgrow']);
-        console.log(venusaur)
-        res.send(Venusaur);
+        console.log('test')
+        console.log(Venusaur.basestats)
+        res.json(venusaur);
     }catch(er){
         next(er);
     }
