@@ -1,4 +1,5 @@
 const conn = require("./conn");
+const User = require("./User")
 const Pokemon = require("./Pokemon");
 const Move = require("./Move");
 
@@ -7,6 +8,12 @@ Pokemon.hasMany(Move);
 
 const syncAndSeed = async() => {
     await conn.sync({ force: true });
+    const [moe, lucy, larry, ethyl] = await Promise.all([
+        User.create({ username: 'moe', password: '123' }),
+        User.create({ username: 'lucy', password: '123' }),
+        User.create({ username: 'larry', password: '123' }),
+        User.create({ username: 'ethyl', password: '123' }),
+      ]);
 
     const [Venusaur, Charizard, Blastoise] = await Promise.all([
         Pokemon.create({
@@ -39,14 +46,12 @@ const syncAndSeed = async() => {
             spd: 105,
             spe: 78,
         }),
-        Move.create({
-            name: 
-        })
     ]);
 }
 
 module.exports = {
     syncAndSeed,
+    User,
     Pokemon,
     Move,
 };
