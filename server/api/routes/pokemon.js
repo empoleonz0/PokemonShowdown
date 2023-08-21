@@ -1,22 +1,18 @@
 const express = require('express');
 const app = express.Router();
-const { Pokemon, Venusaur, Charizard } = require('../../pokemon')
+const {pokemon} = require('../../pokemon')
 
-app.get('/venusaur', async(req, res, next)=>{
+app.get('/', async(req, res, next)=>{
     try{
-        const venusaur = new Venusaur(100, [4, 0, 0, 252, 0, 252], [31, 31, 31, 31, 31, 31], ['Sludge Bomb'], ['Overgrow']);
-        console.log('test')
-        console.log(Venusaur.basestats)
-        res.json(venusaur);
+        res.json(pokemon);
     }catch(er){
         next(er);
     }
 })
 
-app.get('/charizard', async (req, res, next) => {
-    try {
-        const charizard = new Charizard();
-        res.send(charizard);
+app.get('/:name', async(req, res, next)=>{
+    try{
+        res.json(pokemon[req.params.name]);
     }catch(er){
         next(er);
     }
