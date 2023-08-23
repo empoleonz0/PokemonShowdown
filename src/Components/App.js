@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Home, Login, Team} from './pages';
+import { Home, Login, Team, Pokedex} from './pages';
 import { useSelector, useDispatch } from 'react-redux';
 import { loginWithToken, fetchCart } from '../store';
 import { Link, Routes, Route } from 'react-router-dom';
@@ -25,10 +25,12 @@ const App = ()=> {
           <div>
             <nav>
               <Link to='/'>Home</Link>
+              <Link to ='/pokedex'>Pokedex</Link>
               <Link to='/team'>Team</Link>
             </nav>
             <Routes>
               <Route path='/team' element={ <Team /> } />
+              <Route path='/pokedex' element={<Pokedex/>}/>
             </Routes>
           </div>
         )

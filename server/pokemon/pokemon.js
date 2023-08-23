@@ -40,10 +40,10 @@ class Charizard extends Pokemon {
 
 const defaultSettings = [100, [0, 0, 0, 0, 0, 0], [31, 31, 31, 31, 31, 31], [], []];
 
-const pokemon = {
-    venusaur: new Venusaur(defaultSettings),
-    charizard: new Charizard(defaultSettings)
-}
+const pokemon = [
+    new Venusaur(defaultSettings),
+    new Charizard(defaultSettings)
+];
 
 module.exports = {
     pokemon,

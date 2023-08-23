@@ -12,7 +12,8 @@ app.get('/', async(req, res, next)=>{
 
 app.get('/:name', async(req, res, next)=>{
     try{
-        res.json(pokemon[req.params.name]);
+        const result = pokemon.find((pokemon) => pokemon.name = req.params.name)
+        res.json(result);
     }catch(er){
         next(er);
     }

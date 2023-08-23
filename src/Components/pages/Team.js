@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 const Team = ()=> {
   const { team } = useSelector(state => state);
   const dispatch = useDispatch();
+
   return (
     <div>
       <h1>Team</h1>

@@ -1,10 +1,15 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../store';
+import { logout, fetchPokemon } from '../../store';
 
 const Home = ()=> {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchPokemon())
+  }, [dispatch])
+
   return (
     <div>
       <h1>Home</h1>

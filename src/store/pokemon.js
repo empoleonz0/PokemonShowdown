@@ -19,7 +19,7 @@ export const fetchPokemonByName = createAsyncThunk('fetchPokemonById', async (na
     }
 });
 
-const pokemonSlice = createSlice({
+const pokemon = createSlice({
     name: 'pokemon',
     initialState: [],
     reducers: {},
@@ -34,4 +34,4 @@ const pokemonSlice = createSlice({
     }
 })
 
-export default pokemonSlice.renderer;
+export default pokemon.reducer;
