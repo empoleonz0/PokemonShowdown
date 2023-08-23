@@ -19,9 +19,9 @@ export const fetchPokemonById = createAsyncThunk('fetchPokemonById', async (id) 
     }
 });
 
-export const addPokemon = createAsyncThunk('addPokemon', async (pokemon) => {
+export const addPokemon = createAsyncThunk('addPokemon', async (name) => {
     try {
-        const { data } = await axios.post('/api/team', pokemon);
+        const { data } = await axios.get(`/api/pokemon/${name}`);
         return data;
     } catch (er) {
         console.log(er);

@@ -6292,7 +6292,13 @@ const Team = () => {
     team
   } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Team"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pre", null, JSON.stringify(team, null, 2)));
+  const handleClick = e => {
+    e.preventDefault();
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)('venusaur'));
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Team"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: handleClick
+  }, "Add Pokemon"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pre", null, JSON.stringify(team, null, 2)));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Team);
 
@@ -6546,11 +6552,11 @@ const fetchPokemonById = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.create
     console.log(er);
   }
 });
-const addPokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('addPokemon', async pokemon => {
+const addPokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('addPokemon', async name => {
   try {
     const {
       data
-    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/team', pokemon);
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`/api/pokemon/${name}`);
     return data;
   } catch (er) {
     console.log(er);

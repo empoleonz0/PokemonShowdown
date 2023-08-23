@@ -11,6 +11,11 @@ class Pokemon {
             spd: spd,
             spe: spe,
         };
+        this.movepool = movepool;
+        this.abilities = abilities;
+        this.level = level;
+        this.evs = evs;
+        this.ivs = ivs;
         this.stats = {
             hp: Math.floor((2*this.basestats.hp+ivs[0]+evs[0]/4)*level/100)+level+10,
             atk: Math.floor((((2*this.basestats.atk+ivs[1]+evs[1]/4)*level)/100+5)),
@@ -19,8 +24,6 @@ class Pokemon {
             spd: Math.floor((((2*this.basestats.spd+ivs[4]+evs[4]/4)*level)/100+5)),
             spe: Math.floor((((2*this.basestats.spe+ivs[5]+evs[5]/4)*level)/100+5)),
         }
-        this.movepool = movepool;
-        this.abilities = abilities;
         this.moves = moves;
         this.ability = ability;
     }
@@ -49,7 +52,7 @@ const defaultSettings = [100, [0, 0, 0, 0, 0, 0], [31, 31, 31, 31, 31, 31], [], 
 const pokemon = [
     new Venusaur(defaultSettings),
     new Charizard(defaultSettings),
-    new Blastoise(defaultSettings)
+    new Blastoise(defaultSettings),
 ];
 
 module.exports = {
