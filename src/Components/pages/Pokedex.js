@@ -15,7 +15,7 @@ const Pokedex = ()=> {
                 <div>
                     <h1>{pokemon.name}</h1>
                     {pokemon.types.map(type => (
-                        <p>{type}</p>
+                        <span>{type}</span>
                     ))}
                     <p>HP: {pokemon.basestats.hp}</p>
                     <p>ATK: {pokemon.basestats.atk}</p>

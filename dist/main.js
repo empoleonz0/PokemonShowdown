@@ -6262,7 +6262,7 @@ const Pokedex = () => {
     pokemon
   } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Pokedex"), Object.keys(pokemon).length > 0 ? pokemon.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.basestats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.basestats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.basestats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.basestats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.basestats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.basestats.spe))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "No Pokemon"));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Pokedex"), Object.keys(pokemon).length > 0 ? pokemon.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.basestats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.basestats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.basestats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.basestats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.basestats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.basestats.spe))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "No Pokemon"));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Pokedex);
 
@@ -6414,6 +6414,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   fetchAllUsers: () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers),
 /* harmony export */   fetchPokemon: () => (/* reexport safe */ _pokemon__WEBPACK_IMPORTED_MODULE_3__.fetchPokemon),
 /* harmony export */   fetchPokemonByName: () => (/* reexport safe */ _pokemon__WEBPACK_IMPORTED_MODULE_3__.fetchPokemonByName),
+/* harmony export */   fetchTeam: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.fetchTeam),
 /* harmony export */   loginWithToken: () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_1__.loginWithToken),
 /* harmony export */   logout: () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_1__.logout),
 /* harmony export */   updateUserProfile: () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUserProfile)
@@ -6509,8 +6510,48 @@ const pokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   fetchPokemonByName: () => (/* binding */ fetchPokemonByName),
+/* harmony export */   fetchTeam: () => (/* binding */ fetchTeam)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
 
 
+const fetchTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('fetchTeam', async () => {
+  try {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/team');
+    return data;
+  } catch (er) {
+    console.log(er);
+  }
+});
+const fetchPokemonByName = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('fetchPokemonById', async name => {
+  try {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`/api/products/${name}`);
+    return data;
+  } catch (er) {
+    console.log(er);
+  }
+});
+const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'team',
+  initialState: [],
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchTeam.fulfilled, (state, action) => {
+      return action.payload;
+    }).addCase(fetchPokemonByName.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  }
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (team.reducer);
 
 /***/ }),
 
