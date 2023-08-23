@@ -10,9 +10,9 @@ export const fetchPokemon = createAsyncThunk('fetchPokemon', async()=>{
     }
 })
 
-export const fetchPokemonByName = createAsyncThunk('fetchPokemonById', async (name) => {
+export const fetchPokemonByName = createAsyncThunk('fetchPokemonByName', async (name) => {
     try {
-        const { data } = await axios.get(`/api/products/${name}`);
+        const { data } = await axios.get(`/api/pokemon/${name}`);
         return data;
     } catch (er) {
         console.log(er);
