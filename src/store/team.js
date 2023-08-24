@@ -40,7 +40,6 @@ export const updatePokemon = createAsyncThunk('updatePokemon', async (newData) =
 
 export const deletePokemon = createAsyncThunk('deletePokemon', async (teamId) => {
     try {
-        await axios.delete(`/api/team/${teamId}`);
         return teamId;
     } catch (er) {
         console.log(er);
@@ -54,13 +53,18 @@ const team = createSlice({
     extraReducers: (builder) => {
         builder
         .addCase(addPokemon.fulfilled, (state, action) => {
+            if (state.length > 0) {
+                action.payload.teamId = state.length;
+            } else {
+                action.payload.teamId = 0;
+            }
             return [...state, action.payload];
         })
         .addCase(updatePokemon.fulfilled, (state, action) => {
             return state.map(pokemon => pokemon.id === action.payload.id ? action.payload : pokemon)
           })
         .addCase(deletePokemon.fulfilled, (state, action) => {
-            return state.filter(product => product.id !== action.payload);
+            return state.filter(product => product.teamId !== action.payload);
         })
     }
 })
