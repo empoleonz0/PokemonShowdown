@@ -36,9 +36,7 @@ const Team = ()=> {
             <p>Create a Team!</p>
         )}
       {Object.keys(team).length < 6 ? (
-        <form>
-          <button onClick={addpokemon}>Add Pokemon</button>
-        </form>
+        <button onClick={addpokemon}>Add Pokemon</button>
       ) : (
         <p></p>
       )}

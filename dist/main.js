@@ -6268,44 +6268,6 @@ const Pokedex = () => {
 
 /***/ }),
 
-/***/ "./src/Components/pages/SingleTeam.js":
-/*!********************************************!*\
-  !*** ./src/Components/pages/SingleTeam.js ***!
-  \********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
-
-
-
-
-const SingleTeam = () => {
-  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
-  const {
-    teamId
-  } = useParams();
-  const pokemon = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state.team.find(pokemon => pokemon.teamId === teamId));
-  const {
-    team,
-    auth,
-    user
-  } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: ", pokemon.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deletePokemon)(pokemon.teamId))
-  }, "Delete"));
-};
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SingleTeam);
-
-/***/ }),
-
 /***/ "./src/Components/pages/Team.js":
 /*!**************************************!*\
   !*** ./src/Components/pages/Team.js ***!
@@ -6340,9 +6302,9 @@ const Team = () => {
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Team"), Object.keys(team).length > 0 ? team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: ", pokemon.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deletePokemon)(pokemon.teamId))
-  }, "Delete"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), Object.keys(team).length < 6 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "Delete"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), Object.keys(team).length < 6 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: addpokemon
-  }, "Add Pokemon")) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null));
+  }, "Add Pokemon") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Team);
 
@@ -6360,15 +6322,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   Home: () => (/* reexport safe */ _Home_js__WEBPACK_IMPORTED_MODULE_0__["default"]),
 /* harmony export */   Login: () => (/* reexport safe */ _Login_js__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   Pokedex: () => (/* reexport safe */ _Pokedex_js__WEBPACK_IMPORTED_MODULE_2__["default"]),
-/* harmony export */   SingleTeam: () => (/* reexport safe */ _SingleTeam_js__WEBPACK_IMPORTED_MODULE_4__["default"]),
 /* harmony export */   Team: () => (/* reexport safe */ _Team_js__WEBPACK_IMPORTED_MODULE_3__["default"])
 /* harmony export */ });
 /* harmony import */ var _Home_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Home.js */ "./src/Components/pages/Home.js");
 /* harmony import */ var _Login_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Login.js */ "./src/Components/pages/Login.js");
 /* harmony import */ var _Pokedex_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pokedex.js */ "./src/Components/pages/Pokedex.js");
 /* harmony import */ var _Team_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Team.js */ "./src/Components/pages/Team.js");
-/* harmony import */ var _SingleTeam_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SingleTeam.js */ "./src/Components/pages/SingleTeam.js");
-
 
 
 
@@ -6622,7 +6581,7 @@ const updatePokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsy
 });
 const deletePokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('deletePokemon', async teamId => {
   try {
-    return teamId;
+    return teamId * 1;
   } catch (er) {
     console.log(er);
   }
@@ -6638,7 +6597,7 @@ const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       } else {
         action.payload.teamId = 0;
       }
-      return [...state, action.payload];
+      state.push(action.payload);
     }).addCase(updatePokemon.fulfilled, (state, action) => {
       return state.map(pokemon => pokemon.id === action.payload.id ? action.payload : pokemon);
     }).addCase(deletePokemon.fulfilled, (state, action) => {

@@ -40,7 +40,7 @@ export const updatePokemon = createAsyncThunk('updatePokemon', async (newData) =
 
 export const deletePokemon = createAsyncThunk('deletePokemon', async (teamId) => {
     try {
-        return teamId;
+        return teamId*1;
     } catch (er) {
         console.log(er);
     }
@@ -58,7 +58,7 @@ const team = createSlice({
             } else {
                 action.payload.teamId = 0;
             }
-            return [...state, action.payload];
+            state.push(action.payload)
         })
         .addCase(updatePokemon.fulfilled, (state, action) => {
             return state.map(pokemon => pokemon.id === action.payload.id ? action.payload : pokemon)
