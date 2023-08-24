@@ -1,5 +1,5 @@
 const conn = require('./conn');
-const { STRING, UUID, UUIDV4 } = conn.Sequelize;
+const { STRING, INTEGER, } = conn.Sequelize;
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const JWT = process.env.JWT;
@@ -7,9 +7,9 @@ const JWT = process.env.JWT;
 
 const User = conn.define('user', {
   id: {
-    type: UUID,
+    type: INTEGER,
     primaryKey: true,
-    defaultValue: UUIDV4
+    autoIncrement: true,
   },
   username: {
     type: STRING,

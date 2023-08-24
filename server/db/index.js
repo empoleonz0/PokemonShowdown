@@ -1,5 +1,9 @@
 const conn = require("./conn");
 const User = require("./User")
+const Team = require("./Team")
+
+Team.belongsTo(User);
+User.hasMany(Team);
 
 const syncAndSeed = async() => {
     await conn.sync({ force: true });
