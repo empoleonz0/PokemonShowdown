@@ -64,7 +64,7 @@ const team = createSlice({
             return state.map(pokemon => pokemon.id === action.payload.id ? action.payload : pokemon)
           })
         .addCase(deletePokemon.fulfilled, (state, action) => {
-            return state.filter(product => product.teamId !== action.payload);
+            return state.filter(pokemon => pokemon.teamId !== action.payload);
         })
     }
 })

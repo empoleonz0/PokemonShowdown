@@ -12,6 +12,10 @@ const Team = ()=> {
     dispatch(addPokemon('Venusaur'))
   }
 
+  const deletepokemon = (e) => {
+    dispatch(deletePokemon(e.target.value))
+  }
+
   return (
     <div>
       <h1>Team</h1>
@@ -29,7 +33,7 @@ const Team = ()=> {
                     <p>SPA: {pokemon.stats.spa}</p>
                     <p>SPD: {pokemon.stats.spd}</p>
                     <p>SPE: {pokemon.stats.spe}</p>
-                    <button onClick={dispatch(deletePokemon(pokemon.teamId))}>Delete</button>
+                    <button value={pokemon.teamId} onClick={(event) => {deletepokemon(event)}}>Delete</button>
                 </div>
             ))
         ) : (
