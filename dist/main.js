@@ -6298,6 +6298,12 @@ const Team = () => {
     pokemon
   } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const createTeam = () => {
+    dispatch(createTeam({
+      team: [],
+      userId: auth.id
+    }));
+  };
   const addpokemon = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)('Venusaur'));
   };
@@ -6309,7 +6315,9 @@ const Team = () => {
     onClick: event => {
       deletepokemon(event);
     }
-  }, "Delete"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), Object.keys(team).length < 6 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "Delete"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: createTeam
+  }, "Create Team")), Object.keys(team).length < 6 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: addpokemon
   }, "Add Pokemon") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null));
 };
@@ -6554,6 +6562,7 @@ const fetchTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncTh
   }
 });
 const createTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('createTeam', async team => {
+  // infinite loop for some reason?
   try {
     const {
       data
@@ -6587,6 +6596,9 @@ const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
   reducers: {},
   extraReducers: builder => {
     builder.addCase(fetchTeam.fulfilled, (state, action) => {
+      return action.payload;
+    });
+    builder.addCase(createTeam.fulfilled, (state, action) => {
       return action.payload;
     }).addCase(addPokemon.fulfilled, (state, action) => {
       action.payload.teamId = counter;

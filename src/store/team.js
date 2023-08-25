@@ -11,6 +11,7 @@ export const fetchTeam = createAsyncThunk('fetchTeam', async()=>{
 })
 
 export const createTeam = createAsyncThunk('createTeam', async (team) => {
+    // infinite loop for some reason?
     try {
         const { data } = await axios.post('/api/team', team);
         return data;
@@ -43,6 +44,9 @@ const team = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder.addCase(fetchTeam.fulfilled, (state, action)=> {
+            return action.payload;
+        })
+        builder.addCase(createTeam.fulfilled, (state, action)=> {
             return action.payload;
         })
         .addCase(addPokemon.fulfilled, (state, action) => {

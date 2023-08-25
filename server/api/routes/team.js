@@ -13,8 +13,7 @@ app.get('/', async(req, res, next)=>{
 
 app.post('/', async(req, res, next)=>{
     try{
-        const user = await User.findByToken(req.headers.authorization);
-        res.send(await Team.create({userId: user.id}));
+        res.status(201).send(await Team.create(req.body));
     }catch(er){
         next(er);
     }

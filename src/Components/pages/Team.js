@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchPokemonByName, fetchTeam, fetchPokemonById, addPokemon, updatePokemon, deletePokemon } from '../../store';
+import { fetchPokemonByName, fetchTeam, createTeam, fetchPokemonById, addPokemon, updatePokemon, deletePokemon } from '../../store';
 import { Link } from 'react-router-dom';
 import {ProductCard} from './';
 
 const Team = ()=> {
   const { team, auth, user, pokemon } = useSelector(state => state);
   const dispatch = useDispatch();
+
+  const createTeam = () => {
+    dispatch(createTeam({team: [], userId: auth.id}))
+  }
 
   const addpokemon = () => {
     dispatch(addPokemon('Venusaur'))
@@ -37,7 +41,10 @@ const Team = ()=> {
                 </div>
             ))
         ) : (
+          <div>
             <p>Create a Team!</p>
+            <button onClick={createTeam}>Create Team</button>
+          </div>
         )}
       {Object.keys(team).length < 6 ? (
         <button onClick={addpokemon}>Add Pokemon</button>
