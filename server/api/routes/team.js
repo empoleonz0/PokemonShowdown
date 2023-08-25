@@ -5,7 +5,16 @@ const {Team, User} = require('../../db')
 app.get('/', async(req, res, next)=>{
     try{
         const user = await User.findByToken(req.headers.authorization);
-        res.json(await user.getTeams());
+        res.json(await user.getTeam());
+    }catch(er){
+        next(er);
+    }
+})
+
+app.post('/', async(req, res, next)=>{
+    try{
+        const user = await User.findByToken(req.headers.authorization);
+        res.json(await user.createTeam());
     }catch(er){
         next(er);
     }

@@ -28,15 +28,15 @@ const User = conn.define('user', {
   }
 });
 
-User.prototype.getTeams = async function(){
-  const teams = await conn.models.team.findAll(
+User.prototype.getTeam = async function(){
+  const team = await conn.models.team.findOne(
     {
       where: {
         userId: this.id,
       },
     }
   )
-  return teams;
+  return team;
 }
 
 User.addHook('beforeSave', async(user)=> {

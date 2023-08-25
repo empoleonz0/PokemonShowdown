@@ -6429,16 +6429,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   addPokemon: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.addPokemon),
 /* harmony export */   addUserProfile: () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.addUserProfile),
 /* harmony export */   attemptLogin: () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_1__.attemptLogin),
+/* harmony export */   createTeam: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.createTeam),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   deletePokemon: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.deletePokemon),
 /* harmony export */   fetchAllUsers: () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers),
 /* harmony export */   fetchPokemon: () => (/* reexport safe */ _pokemon__WEBPACK_IMPORTED_MODULE_3__.fetchPokemon),
-/* harmony export */   fetchPokemonById: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.fetchPokemonById),
 /* harmony export */   fetchPokemonByName: () => (/* reexport safe */ _pokemon__WEBPACK_IMPORTED_MODULE_3__.fetchPokemonByName),
 /* harmony export */   fetchTeam: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.fetchTeam),
 /* harmony export */   loginWithToken: () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_1__.loginWithToken),
 /* harmony export */   logout: () => (/* reexport safe */ _auth__WEBPACK_IMPORTED_MODULE_1__.logout),
-/* harmony export */   updatePokemon: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.updatePokemon),
 /* harmony export */   updateUserProfile: () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUserProfile)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
@@ -6534,11 +6533,10 @@ const pokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addPokemon: () => (/* binding */ addPokemon),
+/* harmony export */   createTeam: () => (/* binding */ createTeam),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   deletePokemon: () => (/* binding */ deletePokemon),
-/* harmony export */   fetchPokemonById: () => (/* binding */ fetchPokemonById),
-/* harmony export */   fetchTeam: () => (/* binding */ fetchTeam),
-/* harmony export */   updatePokemon: () => (/* binding */ updatePokemon)
+/* harmony export */   fetchTeam: () => (/* binding */ fetchTeam)
 /* harmony export */ });
 /* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
@@ -6554,11 +6552,11 @@ const fetchTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncTh
     console.log(er);
   }
 });
-const fetchPokemonById = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('fetchPokemonById', async id => {
+const createTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('createTeam', async () => {
   try {
     const {
       data
-    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`/api/team/${id}`);
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/team', []);
     return data;
   } catch (er) {
     console.log(er);
@@ -6574,17 +6572,6 @@ const addPokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncT
     console.log(er);
   }
 });
-const updatePokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('updatePokemon', async newData => {
-  const {
-    id
-  } = newData;
-  try {
-    const response = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].put(`/api/team/${id}`, newData);
-    return response.data;
-  } catch (er) {
-    console.log(er);
-  }
-});
 const deletePokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('deletePokemon', async teamId => {
   try {
     return teamId * 1;
@@ -6592,20 +6579,18 @@ const deletePokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsy
     console.log(er);
   }
 });
+let counter = 0;
 const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
   name: 'team',
   initialState: [],
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(addPokemon.fulfilled, (state, action) => {
-      if (state.length > 0) {
-        action.payload.teamId = state.length;
-      } else {
-        action.payload.teamId = 0;
-      }
+    builder.addCase(fetchTeam.fulfilled, (state, action) => {
+      return action.payload;
+    }).addCase(addPokemon.fulfilled, (state, action) => {
+      action.payload.teamId = counter;
+      counter++;
       state.push(action.payload);
-    }).addCase(updatePokemon.fulfilled, (state, action) => {
-      return state.map(pokemon => pokemon.id === action.payload.id ? action.payload : pokemon);
     }).addCase(deletePokemon.fulfilled, (state, action) => {
       return state.filter(pokemon => pokemon.teamId !== action.payload);
     });

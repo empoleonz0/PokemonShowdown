@@ -10,29 +10,19 @@ export const fetchTeam = createAsyncThunk('fetchTeam', async()=>{
     }
 })
 
-export const fetchPokemonById = createAsyncThunk('fetchPokemonById', async (id) => {
+export const createTeam = createAsyncThunk('createTeam', async () => {
     try {
-        const { data } = await axios.get(`/api/team/${id}`);
+        const { data } = await axios.post('/api/team', []);
         return data;
     } catch (er) {
         console.log(er);
     }
-});
+})
 
 export const addPokemon = createAsyncThunk('addPokemon', async (name) => {
     try {
         const { data } = await axios.get(`/api/pokemon/${name}`);
         return data;
-    } catch (er) {
-        console.log(er);
-    }
-});
-
-export const updatePokemon = createAsyncThunk('updatePokemon', async (newData) => {
-    const { id } = newData;
-    try {
-        const response = await axios.put(`/api/team/${id}`, newData)
-        return response.data;
     } catch (er) {
         console.log(er);
     }
@@ -46,23 +36,20 @@ export const deletePokemon = createAsyncThunk('deletePokemon', async (teamId) =>
     }
 });
 
+let counter = 0;
 const team = createSlice({
     name: 'team',
     initialState: [],
     reducers: {},
     extraReducers: (builder) => {
-        builder
+        builder.addCase(fetchTeam.fulfilled, (state, action)=> {
+            return action.payload;
+        })
         .addCase(addPokemon.fulfilled, (state, action) => {
-            if (state.length > 0) {
-                action.payload.teamId = state.length;
-            } else {
-                action.payload.teamId = 0;
-            }
+            action.payload.teamId = counter;
+            counter++
             state.push(action.payload)
         })
-        .addCase(updatePokemon.fulfilled, (state, action) => {
-            return state.map(pokemon => pokemon.id === action.payload.id ? action.payload : pokemon)
-          })
         .addCase(deletePokemon.fulfilled, (state, action) => {
             return state.filter(pokemon => pokemon.teamId !== action.payload);
         })
