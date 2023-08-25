@@ -3,7 +3,7 @@ const User = require("./User")
 const Team = require("./Team")
 
 Team.belongsTo(User);
-User.hasMany(Team);
+User.hasOne(Team);
 
 const syncAndSeed = async() => {
     await conn.sync({ force: true });
@@ -12,7 +12,7 @@ const syncAndSeed = async() => {
         User.create({ username: 'lucy', password: '123' }),
         User.create({ username: 'larry', password: '123' }),
         User.create({ username: 'ethyl', password: '123' }),
-      ]);
+    ]);
 }
 
 module.exports = {

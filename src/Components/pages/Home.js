@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, fetchPokemon } from '../../store';
+import { logout, fetchPokemon, fetchTeam } from '../../store';
 
 const Home = ()=> {
   const { auth } = useSelector(state => state);
@@ -8,6 +8,7 @@ const Home = ()=> {
 
   useEffect(()=>{
     dispatch(fetchPokemon())
+    dispatch(fetchTeam())
   }, [dispatch])
 
   return (

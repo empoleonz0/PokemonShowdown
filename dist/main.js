@@ -6177,6 +6177,7 @@ const Home = () => {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchPokemon)());
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
   }, [dispatch]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Welcome ", auth.username, "!!", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.logout)())
@@ -6552,11 +6553,11 @@ const fetchTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncTh
     console.log(er);
   }
 });
-const createTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('createTeam', async () => {
+const createTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('createTeam', async team => {
   try {
     const {
       data
-    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/team', []);
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/team', team);
     return data;
   } catch (er) {
     console.log(er);

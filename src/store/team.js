@@ -10,9 +10,9 @@ export const fetchTeam = createAsyncThunk('fetchTeam', async()=>{
     }
 })
 
-export const createTeam = createAsyncThunk('createTeam', async () => {
+export const createTeam = createAsyncThunk('createTeam', async (team) => {
     try {
-        const { data } = await axios.post('/api/team', []);
+        const { data } = await axios.post('/api/team', team);
         return data;
     } catch (er) {
         console.log(er);
