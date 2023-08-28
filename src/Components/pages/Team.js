@@ -10,7 +10,7 @@ const Team = ()=> {
 
   useEffect(() => {
     dispatch(fetchTeam());
-  },[team])
+  },[])
 
   const createteam = () => {
     dispatch(createTeam({team: [], userId: auth.id}))

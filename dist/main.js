@@ -6300,7 +6300,7 @@ const Team = () => {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
-  }, [team]);
+  }, []);
   const createteam = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.createTeam)({
       team: [],
@@ -6558,9 +6558,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const fetchTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('fetchTeam', async () => {
   try {
+    const token = window.localStorage.getItem('token');
     const {
       data
-    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/team');
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/team', {
+      headers: {
+        authorization: token
+      }
+    });
     return data;
   } catch (er) {
     console.log(er);

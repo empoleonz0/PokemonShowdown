@@ -3,7 +3,12 @@ import axios from 'axios';
 
 export const fetchTeam = createAsyncThunk('fetchTeam', async()=>{
     try{
-        const {data}  = await axios.get('/api/team');
+        const token = window.localStorage.getItem('token');
+        const {data}  = await axios.get('/api/team', {
+            headers: {
+              authorization: token
+            }
+        });
         return data;
     }catch(er){
         console.log(er);
