@@ -11,9 +11,16 @@ export const fetchTeam = createAsyncThunk('fetchTeam', async()=>{
 })
 
 export const createTeam = createAsyncThunk('createTeam', async (team) => {
-    // infinite loop for some reason?
     try {
-        console.log(team)
+        const { data } = await axios.post('/api/team', team);
+        return data;
+    } catch (er) {
+        console.log(er);
+    }
+})
+
+export const updateTeam = createAsyncThunk('updateTeam', async (team) => {
+    try {
         const { data } = await axios.post('/api/team', team);
         return data;
     } catch (er) {
@@ -53,7 +60,7 @@ const team = createSlice({
         .addCase(addPokemon.fulfilled, (state, action) => {
             action.payload.teamId = counter;
             counter++
-            state.push(action.payload)
+            state.team.push(action.payload)
         })
         .addCase(deletePokemon.fulfilled, (state, action) => {
             return state.filter(pokemon => pokemon.teamId !== action.payload);

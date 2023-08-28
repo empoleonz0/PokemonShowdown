@@ -8,6 +8,10 @@ const Team = ()=> {
   const { team, auth, user, pokemon } = useSelector(state => state);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchTeam());
+  },[team])
+
   const createteam = () => {
     dispatch(createTeam({team: [], userId: auth.id}))
   }
