@@ -5,7 +5,7 @@ const {Team, User} = require('../../db')
 app.get('/', async(req, res, next)=>{
     try{
         const user = await User.findByToken(req.headers.authorization);
-        res.json(await user.getTeam());
+        res.send(await user.getTeam());
     }catch(er){
         next(er);
     }

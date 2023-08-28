@@ -8,7 +8,7 @@ const Team = ()=> {
   const { team, auth, user, pokemon } = useSelector(state => state);
   const dispatch = useDispatch();
 
-  const createTeam = () => {
+  const createteam = () => {
     dispatch(createTeam({team: [], userId: auth.id}))
   }
 
@@ -24,7 +24,7 @@ const Team = ()=> {
     <div>
       <h1>Team</h1>
       {Object.keys(team).length > 0 ? (
-            team.map(pokemon => (
+            team.team.map(pokemon => (
                 <div>
                     <h1>{pokemon.name}</h1>
                     {pokemon.types.map(type => (
@@ -43,7 +43,7 @@ const Team = ()=> {
         ) : (
           <div>
             <p>Create a Team!</p>
-            <button onClick={createTeam}>Create Team</button>
+            <button onClick={createteam}>Create Team</button>
           </div>
         )}
       {Object.keys(team).length < 6 ? (

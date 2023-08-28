@@ -13,6 +13,7 @@ export const fetchTeam = createAsyncThunk('fetchTeam', async()=>{
 export const createTeam = createAsyncThunk('createTeam', async (team) => {
     // infinite loop for some reason?
     try {
+        console.log(team)
         const { data } = await axios.post('/api/team', team);
         return data;
     } catch (er) {

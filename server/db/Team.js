@@ -1,6 +1,6 @@
 const { DataTypes } = require('sequelize');
 const conn = require('./conn');
-const { INTEGER, STRING } = conn.Sequelize;
+const { INTEGER, STRING, ARRAY } = conn.Sequelize;
 
 const Team = conn.define('team', {
     id: {
@@ -9,8 +9,8 @@ const Team = conn.define('team', {
         autoIncrement: true,
       },
     team: {
-        type: STRING,
-        defaultValue: '',
+        type: ARRAY(STRING),
+        defaultValue: [''],
         allowNull: false
     },
 });
