@@ -10,7 +10,7 @@ const Team = conn.define('team', {
       },
     team: {
         type: ARRAY(STRING),
-        defaultValue: [''],
+        defaultValue: [],
         allowNull: false
     },
 });

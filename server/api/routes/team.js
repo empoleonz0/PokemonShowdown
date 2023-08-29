@@ -19,4 +19,22 @@ app.post('/', async(req, res, next)=>{
     }
 })
 
+app.put('/', async(req, res, next) => {
+    try{
+        const team = await Team.findOne({
+            where: {
+                userId: req.body.userId,
+            }
+        })
+        if (!team) {
+            res.status(404).send('Team not found');
+        } else {
+            await team.update(req.body);
+            res.send(team);
+        }
+    }catch(er){
+        next(er);
+    }
+})
+
 module.exports = app;

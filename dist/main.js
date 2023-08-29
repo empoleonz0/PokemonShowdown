@@ -6298,9 +6298,16 @@ const Team = () => {
     pokemon
   } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  const [updatedTeam, setUpdatedTeam] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(team.team);
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
   }, []);
+
+  // useEffect(() => {
+  //   console.log(team)
+  //   dispatch(updateTeam(team));
+  // },[])
+
   const createteam = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.createTeam)({
       team: [],
@@ -6308,21 +6315,32 @@ const Team = () => {
     }));
   };
   const addpokemon = () => {
-    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)('Venusaur'));
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)('Venusaur')).then(() => {
+      console.log(team);
+    });
   };
   const deletepokemon = e => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deletePokemon)(e.target.value));
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Team"), Object.keys(team).length > 0 ? team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: ", pokemon.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    value: pokemon.teamId,
-    onClick: event => {
-      deletepokemon(event);
-    }
-  }, "Delete"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: createteam
-  }, "Create Team")), Object.keys(team).length < 6 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: addpokemon
-  }, "Add Pokemon") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null));
+  const pokemonTeam = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: ", pokemon.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      value: pokemon.teamId,
+      onClick: event => {
+        deletepokemon(event);
+      }
+    }, "Delete"))), Object.keys(team).length < 6 && addPokemonButton());
+  };
+  const createTeamButton = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: createteam
+    }, "Create Team"));
+  };
+  const addPokemonButton = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      onClick: addpokemon
+    }, "Add Pokemon"));
+  };
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Team"), Object.keys(team).length > 0 ? pokemonTeam() : createTeamButton());
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Team);
 
@@ -6585,7 +6603,7 @@ const updateTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncT
   try {
     const {
       data
-    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].post('/api/team', team);
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].put('/api/team', team);
     return data;
   } catch (er) {
     console.log(er);
@@ -6619,12 +6637,15 @@ const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
     });
     builder.addCase(createTeam.fulfilled, (state, action) => {
       return action.payload;
+    });
+    builder.addCase(updateTeam.fulfilled, (state, action) => {
+      return action.payload;
     }).addCase(addPokemon.fulfilled, (state, action) => {
       action.payload.teamId = counter;
       counter++;
       state.team.push(action.payload);
     }).addCase(deletePokemon.fulfilled, (state, action) => {
-      return state.filter(pokemon => pokemon.teamId !== action.payload);
+      return state.team.filter(pokemon => pokemon.teamId !== action.payload);
     });
   }
 });
