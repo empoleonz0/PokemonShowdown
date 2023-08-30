@@ -15,13 +15,6 @@ const Team = ()=> {
     dispatch(fetchTeam());
   },[])
 
-  //test useEffect here
-  // useEffect(() => {
-  //   setUpdatedTeam(team)
-  //   console.log(updatedTeam)
-  //   // dispatch(updateTeam(team));
-  // },[team])
-
   const createteam = () => {
     dispatch(createTeam({team: [], userId: auth.id}))
   }
@@ -38,32 +31,39 @@ const Team = ()=> {
     })
   }
 
+  const updateteam = () => {
+    dispatch(updateTeam(team))
+  }
+
   return (
     <div>
       <h1>Team</h1>
       {Object.keys(team).length > 0 ? (
         <div>
-        {team.team.map(pokemon => (
+          {team.team.map(pokemon => (
+              <div>
+                  <h1>{pokemon.name}</h1>
+                  {pokemon.types.map(type => (
+                      <span>{type}</span>
+                  ))}
+                  <p>Level: {pokemon.level}</p>
+                  <p>HP: {pokemon.stats.hp}</p>
+                  <p>ATK: {pokemon.stats.atk}</p>
+                  <p>DEF: {pokemon.stats.def}</p>
+                  <p>SPA: {pokemon.stats.spa}</p>
+                  <p>SPD: {pokemon.stats.spd}</p>
+                  <p>SPE: {pokemon.stats.spe}</p>
+                  <button value={pokemon.teamId} onClick={(event) => {deletepokemon(event)}}>Delete</button>
+              </div>
+          ))}
+          {Object.keys(team.team).length < 6 && (
             <div>
-                <h1>{pokemon.name}</h1>
-                {pokemon.types.map(type => (
-                    <span>{type}</span>
-                ))}
-                <p>Level: {pokemon.level}</p>
-                <p>HP: {pokemon.stats.hp}</p>
-                <p>ATK: {pokemon.stats.atk}</p>
-                <p>DEF: {pokemon.stats.def}</p>
-                <p>SPA: {pokemon.stats.spa}</p>
-                <p>SPD: {pokemon.stats.spd}</p>
-                <p>SPE: {pokemon.stats.spe}</p>
-                <button value={pokemon.teamId} onClick={(event) => {deletepokemon(event)}}>Delete</button>
+              <button onClick={addpokemon}>Add Pokemon</button>
             </div>
-        ))}
-        {Object.keys(team.team).length < 6 && (
+          )}
           <div>
-            <button onClick={addpokemon}>Add Pokemon</button>
+            <button onClick={updateteam}>Save Team</button>
           </div>
-        )}
         </div>
       ) : (
         <div>

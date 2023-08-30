@@ -6303,14 +6303,6 @@ const Team = () => {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
   }, []);
-
-  //test useEffect here
-  // useEffect(() => {
-  //   setUpdatedTeam(team)
-  //   console.log(updatedTeam)
-  //   // dispatch(updateTeam(team));
-  // },[team])
-
   const createteam = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.createTeam)({
       team: [],
@@ -6327,6 +6319,9 @@ const Team = () => {
       console.log(team);
     });
   };
+  const updateteam = () => {
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updateTeam)(team));
+  };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Team"), Object.keys(team).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: ", pokemon.level), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     value: pokemon.teamId,
     onClick: event => {
@@ -6334,7 +6329,9 @@ const Team = () => {
     }
   }, "Delete"))), Object.keys(team.team).length < 6 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: addpokemon
-  }, "Add Pokemon"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "Add Pokemon")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: updateteam
+  }, "Save Team"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: createteam
   }, "Create Team")));
 };
