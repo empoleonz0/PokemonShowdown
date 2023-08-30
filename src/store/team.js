@@ -69,9 +69,11 @@ const team = createSlice({
             action.payload.teamId = counter;
             counter++
             state.team.push(action.payload)
+            console.log(state.team)
         })
         .addCase(deletePokemon.fulfilled, (state, action) => {
-            return state.team.filter(pokemon => pokemon.teamId !== action.payload);
+            state.team = state.team.filter(pokemon => pokemon.teamId !== action.payload);
+            return state;
         })
     }
 })

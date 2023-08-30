@@ -7,17 +7,20 @@ import {ProductCard} from './';
 const Team = ()=> {
   const { team, auth, user, pokemon } = useSelector(state => state);
   const dispatch = useDispatch();
+  const [test, setTest] = useState(team)
 
-  const [updatedTeam, setUpdatedTeam] = useState(team.team)
+  const [updatedTeam, setUpdatedTeam] = useState(team)
 
   useEffect(() => {
     dispatch(fetchTeam());
   },[])
 
+  //test useEffect here
   // useEffect(() => {
-  //   console.log(team)
-  //   dispatch(updateTeam(team));
-  // },[])
+  //   setUpdatedTeam(team)
+  //   console.log(updatedTeam)
+  //   // dispatch(updateTeam(team));
+  // },[team])
 
   const createteam = () => {
     dispatch(createTeam({team: [], userId: auth.id}))
@@ -25,12 +28,14 @@ const Team = ()=> {
 
   const addpokemon = () => {
     dispatch(addPokemon('Venusaur')).then(() => {
-      console.log(team)
+      console.log(team);
     })
   }
 
   const deletepokemon = (e) => {
-    dispatch(deletePokemon(e.target.value))
+    dispatch(deletePokemon(e.target.value)).then(() => {
+      console.log(team);
+    })
   }
 
   return (
@@ -54,7 +59,7 @@ const Team = ()=> {
                 <button value={pokemon.teamId} onClick={(event) => {deletepokemon(event)}}>Delete</button>
             </div>
         ))}
-        {Object.keys(team).length < 6 && (
+        {Object.keys(team.team).length < 6 && (
           <div>
             <button onClick={addpokemon}>Add Pokemon</button>
           </div>
