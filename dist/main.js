@@ -6299,10 +6299,13 @@ const Team = () => {
   } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [test, setTest] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(team);
-  const [updatedTeam, setUpdatedTeam] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(team);
+  const [pokemonName, setPokemonName] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
   }, []);
+  const onChange = ev => {
+    setPokemonName(ev.target.value);
+  };
   const createteam = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.createTeam)({
       team: [],
@@ -6310,7 +6313,7 @@ const Team = () => {
     }));
   };
   const addpokemon = () => {
-    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)('Venusaur')).then(() => {
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)(pokemonName)).then(() => {
       console.log(team);
     });
   };
@@ -6327,11 +6330,14 @@ const Team = () => {
     onClick: event => {
       deletepokemon(event);
     }
-  }, "Delete"))), Object.keys(team.team).length < 6 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "Delete"))), Object.keys(team.team).length < 6 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    value: pokemonName,
+    onChange: onChange
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: addpokemon
   }, "Add Pokemon")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: updateteam
-  }, "Save Team"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Create a Team!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "Save Team"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Start Building Your Own Team Now!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: createteam
   }, "Create Team")));
 };

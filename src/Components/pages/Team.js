@@ -9,18 +9,22 @@ const Team = ()=> {
   const dispatch = useDispatch();
   const [test, setTest] = useState(team)
 
-  const [updatedTeam, setUpdatedTeam] = useState(team)
+  const [pokemonName, setPokemonName] = useState('')
 
   useEffect(() => {
     dispatch(fetchTeam());
   },[])
+
+  const onChange = (ev) => {
+    setPokemonName(ev.target.value);
+  };
 
   const createteam = () => {
     dispatch(createTeam({team: [], userId: auth.id}))
   }
 
   const addpokemon = () => {
-    dispatch(addPokemon('Venusaur')).then(() => {
+    dispatch(addPokemon(pokemonName)).then(() => {
       console.log(team);
     })
   }
@@ -58,6 +62,7 @@ const Team = ()=> {
           ))}
           {Object.keys(team.team).length < 6 && (
             <div>
+              <input value = {pokemonName} onChange={onChange}></input>
               <button onClick={addpokemon}>Add Pokemon</button>
             </div>
           )}
@@ -67,7 +72,7 @@ const Team = ()=> {
         </div>
       ) : (
         <div>
-          <p>Create a Team!</p>
+          <p>Start Building Your Own Team Now!</p>
           <button onClick={createteam}>Create Team</button>
         </div>
       )}
