@@ -26,6 +26,7 @@ const Team = ()=> {
   const addpokemon = () => {
     dispatch(addPokemon(pokemonName)).then(() => {
       console.log(team);
+      setPokemonName('')
     })
   }
 
@@ -61,10 +62,9 @@ const Team = ()=> {
               </div>
           ))}
           {Object.keys(team.team).length < 6 && (
-            <div>
-              <input value = {pokemonName} onChange={onChange}></input>
-              <button onClick={addpokemon}>Add Pokemon</button>
-            </div>
+            <form onSubmit={addpokemon}>
+              <input placeholder="Add Pokemon" value = {pokemonName} onChange={onChange}/>
+            </form>
           )}
           <div>
             <button onClick={updateteam}>Save Team</button>

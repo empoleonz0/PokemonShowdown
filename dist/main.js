@@ -6315,6 +6315,7 @@ const Team = () => {
   const addpokemon = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)(pokemonName)).then(() => {
       console.log(team);
+      setPokemonName('');
     });
   };
   const deletepokemon = e => {
@@ -6330,12 +6331,13 @@ const Team = () => {
     onClick: event => {
       deletepokemon(event);
     }
-  }, "Delete"))), Object.keys(team.team).length < 6 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, "Delete"))), Object.keys(team.team).length < 6 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+    onSubmit: addpokemon
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    placeholder: "Add Pokemon",
     value: pokemonName,
     onChange: onChange
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: addpokemon
-  }, "Add Pokemon")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: updateteam
   }, "Save Team"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Start Building Your Own Team Now!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: createteam
