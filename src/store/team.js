@@ -42,6 +42,15 @@ export const addPokemon = createAsyncThunk('addPokemon', async (name) => {
     }
 });
 
+export const updatePokemon = createAsyncThunk('updatePokemon', async (pokemon) => {
+    try {
+        const { data } = await axios.get(`/api/pokemon/${name}`);
+        return data;
+    } catch (er) {
+        console.log(er);
+    }
+})
+
 export const deletePokemon = createAsyncThunk('deletePokemon', async (teamId) => {
     try {
         return teamId*1;
