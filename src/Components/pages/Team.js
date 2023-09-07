@@ -38,6 +38,9 @@ const Team = ()=> {
       <h1>Team</h1>
       {Object.keys(team).length > 0 ? (
         <div>
+          <div>
+            <button onClick={updateteam}>Save Team</button>
+          </div>
           {team.team.map(pokemon => (
               <SinglePokemon key={pokemon.teamId} pokemon = {pokemon}/>
           ))}
@@ -46,9 +49,6 @@ const Team = ()=> {
               <input placeholder="Add Pokemon" value = {pokemonName} onChange={setpokemonname}/>
             </form>
           )}
-          <div>
-            <button onClick={updateteam}>Save Team</button>
-          </div>
         </div>
       ) : (
         <div>
