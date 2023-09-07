@@ -6330,10 +6330,10 @@ const SinglePokemon = props => {
   };
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
     onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     value: level,
     onChange: handleLevelChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "TeamID: ", pokemon.teamId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     value: pokemon.teamId,
     onClick: event => {
       deletepokemon(event);
@@ -6388,7 +6388,6 @@ const Team = () => {
   };
   const addpokemon = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.addPokemon)(pokemonName)).then(() => {
-      console.log(team);
       setPokemonName('');
     });
   };
@@ -6714,17 +6713,24 @@ const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
   extraReducers: builder => {
     builder.addCase(fetchTeam.fulfilled, (state, action) => {
       return action.payload;
-    });
-    builder.addCase(createTeam.fulfilled, (state, action) => {
+    }).addCase(createTeam.fulfilled, (state, action) => {
       return action.payload;
-    });
-    builder.addCase(updateTeam.fulfilled, (state, action) => {
+    }).addCase(updateTeam.fulfilled, (state, action) => {
       return action.payload;
     }).addCase(addPokemon.fulfilled, (state, action) => {
-      action.payload.teamId = counter;
-      counter++;
-      state.team.push(action.payload);
-      console.log(state.team);
+      if (window.localStorage) {
+        let counter;
+        counter = localStorage.counter ? localStorage.counter * 1 : 0 * 1;
+        console.log(typeof counter);
+        action.payload.teamId = counter;
+        state.team.push(action.payload);
+        localStorage.counter = counter + 1;
+        console.log(typeof localStorage.counter);
+      }
+      // action.payload.teamId = counter*1;
+      // counter++
+      // state.team.push(action.payload)
+      // console.log(state.team)
     }).addCase(updatePokemon.fulfilled, (state, action) => {
       state.team = state.team.map(pokemon => pokemon.teamId === action.payload.teamId ? action.payload : pokemon);
     }).addCase(deletePokemon.fulfilled, (state, action) => {

@@ -24,7 +24,6 @@ const Team = ()=> {
 
   const addpokemon = () => {
     dispatch(addPokemon(pokemonName)).then(() => {
-      console.log(team);
       setPokemonName('')
     })
   }

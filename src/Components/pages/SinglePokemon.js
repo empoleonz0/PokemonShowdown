@@ -51,10 +51,11 @@ const SinglePokemon = (props) =>{
                 {pokemon.types.map(type => (
                     <span>{type}</span>
                 ))}
-                <span>
+                <div>
                     <p>Level: </p>
                     <input value = {level} onChange={handleLevelChange}></input>
-                </span>
+                </div>
+                <p>TeamID: {pokemon.teamId}</p>
                 <p>HP: {pokemon.stats.hp}</p>
                 <p>ATK: {pokemon.stats.atk}</p>
                 <p>DEF: {pokemon.stats.def}</p>

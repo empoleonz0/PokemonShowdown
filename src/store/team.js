@@ -64,20 +64,30 @@ const team = createSlice({
     initialState: [],
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(fetchTeam.fulfilled, (state, action)=> {
+        builder
+        .addCase(fetchTeam.fulfilled, (state, action)=> {
             return action.payload;
         })
-        builder.addCase(createTeam.fulfilled, (state, action)=> {
+        .addCase(createTeam.fulfilled, (state, action)=> {
             return action.payload;
         })
-        builder.addCase(updateTeam.fulfilled, (state, action)=> {
+        .addCase(updateTeam.fulfilled, (state, action)=> {
             return action.payload;
         })
         .addCase(addPokemon.fulfilled, (state, action) => {
-            action.payload.teamId = counter;
-            counter++
-            state.team.push(action.payload)
-            console.log(state.team)
+            if (window.localStorage) {
+                let counter;
+                counter = localStorage.counter ? localStorage.counter*1 : 0*1;
+                console.log(typeof counter)
+                action.payload.teamId = counter;
+                state.team.push(action.payload)
+                localStorage.counter = counter+1;
+                console.log(typeof localStorage.counter)
+            }
+            // action.payload.teamId = counter*1;
+            // counter++
+            // state.team.push(action.payload)
+            // console.log(state.team)
         })
         .addCase(updatePokemon.fulfilled, (state, action) => {
             state.team = state.team.map(pokemon => pokemon.teamId === action.payload.teamId ? action.payload : pokemon)
