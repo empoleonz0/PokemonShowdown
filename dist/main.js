@@ -6727,10 +6727,6 @@ const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
         localStorage.counter = counter + 1;
         console.log(typeof localStorage.counter);
       }
-      // action.payload.teamId = counter*1;
-      // counter++
-      // state.team.push(action.payload)
-      // console.log(state.team)
     }).addCase(updatePokemon.fulfilled, (state, action) => {
       state.team = state.team.map(pokemon => pokemon.teamId === action.payload.teamId ? action.payload : pokemon);
     }).addCase(deletePokemon.fulfilled, (state, action) => {
