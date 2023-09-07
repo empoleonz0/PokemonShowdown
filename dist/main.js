@@ -6291,7 +6291,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const SinglePokemon = props => {
-  let {
+  const {
     pokemon
   } = props;
   const {
@@ -6300,14 +6300,30 @@ const SinglePokemon = props => {
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [level, setLevel] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.level);
   const handleLevelChange = e => {
-    setLevel(e.target.value);
-    let copy = team;
-    console.log(copy.team);
-    copy.team.map(mon => {
-      if (mon.teamId === pokemon.teamId) {
-        mon.level = level;
-      }
-    });
+    setLevel(e.target.value * 1);
+    const updatedPokemon = {
+      id: pokemon.id,
+      name: pokemon.name,
+      types: pokemon.types,
+      basestats: pokemon.basestats,
+      movepool: pokemon.movepool,
+      abilities: pokemon.abilities,
+      level: level,
+      evs: pokemon.evs,
+      ivs: pokemon.ivs,
+      stats: {
+        hp: Math.floor((2 * pokemon.basestats.hp + pokemon.ivs[0] + pokemon.evs[0] / 4) * level / 100) + level + 10,
+        atk: Math.floor((2 * pokemon.basestats.atk + pokemon.ivs[1] + pokemon.evs[1] / 4) * level / 100 + 5),
+        def: Math.floor((2 * pokemon.basestats.def + pokemon.ivs[2] + pokemon.evs[2] / 4) * level / 100 + 5),
+        spa: Math.floor((2 * pokemon.basestats.spa + pokemon.ivs[3] + pokemon.evs[3] / 4) * level / 100 + 5),
+        spd: Math.floor((2 * pokemon.basestats.spd + pokemon.ivs[4] + pokemon.evs[4] / 4) * level / 100 + 5),
+        spe: Math.floor((2 * pokemon.basestats.spe + pokemon.ivs[5] + pokemon.evs[5] / 4) * level / 100 + 5)
+      },
+      moves: pokemon.moves,
+      ability: pokemon.ability,
+      teamId: pokemon.teamId
+    };
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updatePokemon)(updatedPokemon));
   };
   const deletepokemon = e => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deletePokemon)(e.target.value));
@@ -6315,7 +6331,7 @@ const SinglePokemon = props => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     value: level,
     onChange: handleLevelChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "TeamID: ", pokemon.teamId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     value: pokemon.teamId,
     onClick: event => {
       deletepokemon(event);
@@ -6676,10 +6692,7 @@ const addPokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncT
 });
 const updatePokemon = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('updatePokemon', async pokemon => {
   try {
-    const {
-      data
-    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get(`/api/pokemon/${name}`);
-    return data;
+    return pokemon;
   } catch (er) {
     console.log(er);
   }
@@ -6710,6 +6723,8 @@ const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
       counter++;
       state.team.push(action.payload);
       console.log(state.team);
+    }).addCase(updatePokemon.fulfilled, (state, action) => {
+      state.team = state.team.map(pokemon => pokemon.teamId === action.payload.teamId ? action.payload : pokemon);
     }).addCase(deletePokemon.fulfilled, (state, action) => {
       state.team = state.team.filter(pokemon => pokemon.teamId !== action.payload);
       return state;
