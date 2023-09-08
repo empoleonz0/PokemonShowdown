@@ -6306,12 +6306,36 @@ const SinglePokemon = props => {
   const [spdEV, setSpdEV] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.evs[4]);
   const [speEV, setSpeEV] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.evs[5]);
   const handleLevelChange = e => setLevel(e.target.value * 1);
-  const handleHpEVChange = e => setHpEV(e.target.value * 1);
-  const handleAtkEVChange = e => setAtkEV(e.target.value * 1);
-  const handleDefEVChange = e => setDefEV(e.target.value * 1);
-  const handleSpaEVChange = e => setSpaEV(e.target.value * 1);
-  const handleSpdEVChange = e => setSpdEV(e.target.value * 1);
-  const handleSpeEVChange = e => setSpeEV(e.target.value * 1);
+  const handleHpEVChange = e => {
+    if (e.target.value * 1 + atkEV + defEV + spaEV + spdEV + speEV <= 508) {
+      setHpEV(e.target.value * 1);
+    }
+  };
+  const handleAtkEVChange = e => {
+    if (hpEV + e.target.value * 1 + defEV + spaEV + spdEV + speEV <= 508) {
+      setAtkEV(e.target.value * 1);
+    }
+  };
+  const handleDefEVChange = e => {
+    if (hpEV + atkEV + e.target.value * 1 + spaEV + spdEV + speEV <= 508) {
+      setDefEV(e.target.value * 1);
+    }
+  };
+  const handleSpaEVChange = e => {
+    if (hpEV + atkEV + defEV + e.target.value * 1 + spdEV + speEV <= 508) {
+      setSpaEV(e.target.value * 1);
+    }
+  };
+  const handleSpdEVChange = e => {
+    if (hpEV + atkEV + defEV + spaEV + e.target.value * 1 + speEV <= 508) {
+      setSpdEV(e.target.value * 1);
+    }
+  };
+  const handleSpeEVChange = e => {
+    if (hpEV + atkEV + defEV + spaEV + spdEV + e.target.value * 1 <= 508) {
+      setSpeEV(e.target.value * 1);
+    }
+  };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const updatedPokemon = {
       id: pokemon.id,
