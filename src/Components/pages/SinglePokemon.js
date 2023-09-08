@@ -11,10 +11,7 @@ const SinglePokemon = (props) =>{
 
     const [level, setLevel] = useState(pokemon.level)
 
-    const handleLevelChange = (e) => setLevel(e.target.value*1);
-
-
-    const handleSubmit = () => {
+    useEffect(() => {
         const updatedPokemon = {
             id: pokemon.id,
             name: pokemon.name,
@@ -38,7 +35,9 @@ const SinglePokemon = (props) =>{
             teamId: pokemon.teamId,
         }
         dispatch(updatePokemon(updatedPokemon));
-    }
+    }, [level])
+
+    const handleLevelChange = (e) => setLevel(e.target.value*1);
 
     const deletepokemon = (e) => {
         dispatch(deletePokemon(e.target.value))
@@ -46,23 +45,23 @@ const SinglePokemon = (props) =>{
 
     return(
         <div>
-            <form onSubmit={handleSubmit}>
-                <h1>{pokemon.name}</h1>
-                {pokemon.types.map(type => (
-                    <span>{type}</span>
-                ))}
-                <div>
-                    <p>Level: </p>
-                    <input value = {level} onChange={handleLevelChange}></input>
-                </div>
-                <p>TeamID: {pokemon.teamId}</p>
-                <p>HP: {pokemon.stats.hp}</p>
-                <p>ATK: {pokemon.stats.atk}</p>
-                <p>DEF: {pokemon.stats.def}</p>
-                <p>SPA: {pokemon.stats.spa}</p>
-                <p>SPD: {pokemon.stats.spd}</p>
-                <p>SPE: {pokemon.stats.spe}</p>
-            </form>
+            <h1>{pokemon.name}</h1>
+            {pokemon.types.map(type => (
+                <span>{type}</span>
+            ))}
+            <div>
+                <p>
+                    Level:
+                    <input type="number" min="1" max="100" value = {level} onChange={handleLevelChange}></input>
+                </p>
+            </div>
+            <p>TeamID: {pokemon.teamId}</p>
+            <p>HP: {pokemon.stats.hp}</p>
+            <p>ATK: {pokemon.stats.atk}</p>
+            <p>DEF: {pokemon.stats.def}</p>
+            <p>SPA: {pokemon.stats.spa}</p>
+            <p>SPD: {pokemon.stats.spd}</p>
+            <p>SPE: {pokemon.stats.spe}</p>
             <button value={pokemon.teamId} onClick={(event) => {deletepokemon(event)}}>Delete</button>
         </div>
     )

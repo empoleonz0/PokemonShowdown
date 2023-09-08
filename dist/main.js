@@ -6299,8 +6299,7 @@ const SinglePokemon = props => {
   } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   const [level, setLevel] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.level);
-  const handleLevelChange = e => setLevel(e.target.value * 1);
-  const handleSubmit = () => {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const updatedPokemon = {
       id: pokemon.id,
       name: pokemon.name,
@@ -6324,16 +6323,18 @@ const SinglePokemon = props => {
       teamId: pokemon.teamId
     };
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updatePokemon)(updatedPokemon));
-  };
+  }, [level]);
+  const handleLevelChange = e => setLevel(e.target.value * 1);
   const deletepokemon = e => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deletePokemon)(e.target.value));
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
-    onSubmit: handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "number",
+    min: "1",
+    max: "100",
     value: level,
     onChange: handleLevelChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "TeamID: ", pokemon.teamId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "TeamID: ", pokemon.teamId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     value: pokemon.teamId,
     onClick: event => {
       deletepokemon(event);
