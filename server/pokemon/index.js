@@ -3,5 +3,5 @@ const {botTeam} = require("./botTeam")
 
 module.exports = {
     pokemon,
-    botTeam
+    botTeam,
 }

@@ -16,14 +16,6 @@ const botTeam = [
         level: 100,
         evs: [4, 0, 0, 252, 0, 252],
         ivs: [31, 0, 31, 31, 31, 31],
-        stats: {
-            hp: Math.floor((2*this.basestats.hp+this.ivs[0]+this.evs[0]/4)*this.level/100)+this.level+10,
-            atk: Math.floor((((2*this.basestats.atk+this.ivs[1]+this.evs[1]/4)*this.level)/100+5)),
-            def: Math.floor((((2*this.basestats.def+this.ivs[2]+this.evs[2]/4)*this.level)/100+5)),
-            spa: Math.floor((((2*this.basestats.spa+this.ivs[3]+this.evs[3]/4)*this.level)/100+5)),
-            spd: Math.floor((((2*this.basestats.spd+this.ivs[4]+this.evs[4]/4)*this.level)/100+5)),
-            spe: Math.floor((((2*this.basestats.spe+this.ivs[5]+this.evs[5]/4)*this.level)/100+5)),
-        },
         moves: ['Psystrike','Aura Sphere','Fire Blast','Ice Beam'],
         ability: ['Pressure']
     }, 
@@ -44,14 +36,6 @@ const botTeam = [
         level: 100,
         evs: [252, 252, 0, 0, 0, 4],
         ivs: [31, 31, 31, 31, 31, 31],
-        stats: {
-            hp: Math.floor((2*this.basestats.hp+this.ivs[0]+this.evs[0]/4)*this.level/100)+this.level+10,
-            atk: Math.floor((((2*this.basestats.atk+this.ivs[1]+this.evs[1]/4)*this.level)/100+5)),
-            def: Math.floor((((2*this.basestats.def+this.ivs[2]+this.evs[2]/4)*this.level)/100+5)),
-            spa: Math.floor((((2*this.basestats.spa+this.ivs[3]+this.evs[3]/4)*this.level)/100+5)),
-            spd: Math.floor((((2*this.basestats.spd+this.ivs[4]+this.evs[4]/4)*this.level)/100+5)),
-            spe: Math.floor((((2*this.basestats.spe+this.ivs[5]+this.evs[5]/4)*this.level)/100+5)),
-        },
         moves: ['Sacred Fire','Brave Bird','Earthquake','Recover'],
         ability: ['Regenerator']
     },
@@ -72,14 +56,6 @@ const botTeam = [
         level: 100,
         evs: [0, 252, 0, 4, 0, 252],
         ivs: [31, 31, 31, 31, 31, 31],
-        stats: {
-            hp: Math.floor((2*this.basestats.hp+this.ivs[0]+this.evs[0]/4)*this.level/100)+this.level+10,
-            atk: Math.floor((((2*this.basestats.atk+this.ivs[1]+this.evs[1]/4)*this.level)/100+5)),
-            def: Math.floor((((2*this.basestats.def+this.ivs[2]+this.evs[2]/4)*this.level)/100+5)),
-            spa: Math.floor((((2*this.basestats.spa+this.ivs[3]+this.evs[3]/4)*this.level)/100+5)),
-            spd: Math.floor((((2*this.basestats.spd+this.ivs[4]+this.evs[4]/4)*this.level)/100+5)),
-            spe: Math.floor((((2*this.basestats.spe+this.ivs[5]+this.evs[5]/4)*this.level)/100+5)),
-        },
         moves: ['Sacred Fire','Brave Bird','Earthquake','Recover'],
         ability: ['Regenerator']
     },
@@ -100,14 +76,6 @@ const botTeam = [
         level: 100,
         evs: [4, 0, 0, 252, 0, 252],
         ivs: [31, 0, 31, 31, 31, 31],
-        stats: {
-            hp: Math.floor((2*this.basestats.hp+this.ivs[0]+this.evs[0]/4)*this.level/100)+this.level+10,
-            atk: Math.floor((((2*this.basestats.atk+this.ivs[1]+this.evs[1]/4)*this.level)/100+5)),
-            def: Math.floor((((2*this.basestats.def+this.ivs[2]+this.evs[2]/4)*this.level)/100+5)),
-            spa: Math.floor((((2*this.basestats.spa+this.ivs[3]+this.evs[3]/4)*this.level)/100+5)),
-            spd: Math.floor((((2*this.basestats.spd+this.ivs[4]+this.evs[4]/4)*this.level)/100+5)),
-            spe: Math.floor((((2*this.basestats.spe+this.ivs[5]+this.evs[5]/4)*this.level)/100+5)),
-        },
         moves: ['Dragon Pulse','Flash Cannon','Fire Blast','Thunder'],
         ability: ['Pressure']
     }, 
@@ -128,14 +96,6 @@ const botTeam = [
         level: 100,
         evs: [4, 0, 0, 252, 0, 252],
         ivs: [31, 0, 31, 31, 31, 31],
-        stats: {
-            hp: Math.floor((2*this.basestats.hp+this.ivs[0]+this.evs[0]/4)*this.level/100)+this.level+10,
-            atk: Math.floor((((2*this.basestats.atk+this.ivs[1]+this.evs[1]/4)*this.level)/100+5)),
-            def: Math.floor((((2*this.basestats.def+this.ivs[2]+this.evs[2]/4)*this.level)/100+5)),
-            spa: Math.floor((((2*this.basestats.spa+this.ivs[3]+this.evs[3]/4)*this.level)/100+5)),
-            spd: Math.floor((((2*this.basestats.spd+this.ivs[4]+this.evs[4]/4)*this.level)/100+5)),
-            spe: Math.floor((((2*this.basestats.spe+this.ivs[5]+this.evs[5]/4)*this.level)/100+5)),
-        },
         moves: ['Spacial Rend','Hydro Pump','Fire Blast','Thunder'],
         ability: ['Pressure']
     }, 
@@ -156,18 +116,21 @@ const botTeam = [
         level: 100,
         evs: [0, 252, 0, 4, 0, 252],
         ivs: [31, 31, 31, 31, 31, 31],
-        stats: {
-            hp: Math.floor((2*this.basestats.hp+this.ivs[0]+this.evs[0]/4)*this.level/100)+this.level+10,
-            atk: Math.floor((((2*this.basestats.atk+this.ivs[1]+this.evs[1]/4)*this.level)/100+5)),
-            def: Math.floor((((2*this.basestats.def+this.ivs[2]+this.evs[2]/4)*this.level)/100+5)),
-            spa: Math.floor((((2*this.basestats.spa+this.ivs[3]+this.evs[3]/4)*this.level)/100+5)),
-            spd: Math.floor((((2*this.basestats.spd+this.ivs[4]+this.evs[4]/4)*this.level)/100+5)),
-            spe: Math.floor((((2*this.basestats.spe+this.ivs[5]+this.evs[5]/4)*this.level)/100+5)),
-        },
         moves: ['Bolt Strike','Dragon Claw','Draco Meteor','Volt Switch'],
         ability: ['Teravolt']
     },
 ]
+
+botTeam.map(pokemon => (
+    pokemon.stats = {
+        hp: Math.floor((2*pokemon.basestats.hp+pokemon.ivs[0]+pokemon.evs[0]/4)*pokemon.level/100)+pokemon.level+10,
+        atk: Math.floor((((2*pokemon.basestats.atk+pokemon.ivs[1]+pokemon.evs[1]/4)*pokemon.level)/100+5)),
+        def: Math.floor((((2*pokemon.basestats.def+pokemon.ivs[2]+pokemon.evs[2]/4)*pokemon.level)/100+5)),
+        spa: Math.floor((((2*pokemon.basestats.spa+pokemon.ivs[3]+pokemon.evs[3]/4)*pokemon.level)/100+5)),
+        spd: Math.floor((((2*pokemon.basestats.spd+pokemon.ivs[4]+pokemon.evs[4]/4)*pokemon.level)/100+5)),
+        spe: Math.floor((((2*pokemon.basestats.spe+pokemon.ivs[5]+pokemon.evs[5]/4)*pokemon.level)/100+5)),
+    }
+))
 
 module.exports = {
     botTeam,

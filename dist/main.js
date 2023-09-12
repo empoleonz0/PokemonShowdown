@@ -6140,15 +6140,53 @@ const App = () => {
     to: "/pokedex"
   }, "Pokedex"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
     to: "/team"
-  }, "Team")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+  }, "Team"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
+    to: "/battle"
+  }, "Battle")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Routes, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
+    path: "/pokedex",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages__WEBPACK_IMPORTED_MODULE_1__.Pokedex, null)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
     path: "/team",
     element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages__WEBPACK_IMPORTED_MODULE_1__.Team, null)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
-    path: "/pokedex",
-    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages__WEBPACK_IMPORTED_MODULE_1__.Pokedex, null)
+    path: "/battle",
+    element: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_pages__WEBPACK_IMPORTED_MODULE_1__.Battle, null)
   }))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (App);
+
+/***/ }),
+
+/***/ "./src/Components/pages/Battle.js":
+/*!****************************************!*\
+  !*** ./src/Components/pages/Battle.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store */ "./src/store/index.js");
+
+
+
+
+const Battle = () => {
+  const {
+    botTeam
+  } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
+  const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchBotTeam)());
+  }, [dispatch]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Bot Team"), JSON.stringify(botTeam));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Battle);
 
 /***/ }),
 
@@ -6534,6 +6572,7 @@ const Team = () => {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   Battle: () => (/* reexport safe */ _Battle_js__WEBPACK_IMPORTED_MODULE_5__["default"]),
 /* harmony export */   Home: () => (/* reexport safe */ _Home_js__WEBPACK_IMPORTED_MODULE_0__["default"]),
 /* harmony export */   Login: () => (/* reexport safe */ _Login_js__WEBPACK_IMPORTED_MODULE_1__["default"]),
 /* harmony export */   Pokedex: () => (/* reexport safe */ _Pokedex_js__WEBPACK_IMPORTED_MODULE_2__["default"]),
@@ -6545,6 +6584,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pokedex_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Pokedex.js */ "./src/Components/pages/Pokedex.js");
 /* harmony import */ var _Team_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Team.js */ "./src/Components/pages/Team.js");
 /* harmony import */ var _SinglePokemon_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SinglePokemon.js */ "./src/Components/pages/SinglePokemon.js");
+/* harmony import */ var _Battle_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Battle.js */ "./src/Components/pages/Battle.js");
+
 
 
 
@@ -6629,6 +6670,46 @@ const {
 
 /***/ }),
 
+/***/ "./src/store/botTeam.js":
+/*!******************************!*\
+  !*** ./src/store/botTeam.js ***!
+  \******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   fetchBotTeam: () => (/* binding */ fetchBotTeam)
+/* harmony export */ });
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/lib/axios.js");
+
+
+const fetchBotTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createAsyncThunk)('fetchBotTeam', async () => {
+  try {
+    const {
+      data
+    } = await axios__WEBPACK_IMPORTED_MODULE_1__["default"].get('/api/botTeam');
+    return data;
+  } catch (er) {
+    console.log(er);
+  }
+});
+const botTeam = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
+  name: 'botTeam',
+  initialState: [],
+  reducers: {},
+  extraReducers: builder => {
+    builder.addCase(fetchBotTeam.fulfilled, (state, action) => {
+      return action.payload;
+    });
+  }
+});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (botTeam.reducer);
+
+/***/ }),
+
 /***/ "./src/store/index.js":
 /*!****************************!*\
   !*** ./src/store/index.js ***!
@@ -6645,6 +6726,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   deletePokemon: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.deletePokemon),
 /* harmony export */   fetchAllUsers: () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.fetchAllUsers),
+/* harmony export */   fetchBotTeam: () => (/* reexport safe */ _botTeam__WEBPACK_IMPORTED_MODULE_5__.fetchBotTeam),
 /* harmony export */   fetchPokemon: () => (/* reexport safe */ _pokemon__WEBPACK_IMPORTED_MODULE_3__.fetchPokemon),
 /* harmony export */   fetchPokemonByName: () => (/* reexport safe */ _pokemon__WEBPACK_IMPORTED_MODULE_3__.fetchPokemonByName),
 /* harmony export */   fetchTeam: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.fetchTeam),
@@ -6654,29 +6736,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   updateTeam: () => (/* reexport safe */ _team__WEBPACK_IMPORTED_MODULE_4__.updateTeam),
 /* harmony export */   updateUserProfile: () => (/* reexport safe */ _user__WEBPACK_IMPORTED_MODULE_2__.updateUserProfile)
 /* harmony export */ });
-/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
+/* harmony import */ var _reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @reduxjs/toolkit */ "./node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux-logger */ "./node_modules/redux-logger/dist/redux-logger.js");
 /* harmony import */ var redux_logger__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux_logger__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth */ "./src/store/auth.js");
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user */ "./src/store/user.js");
 /* harmony import */ var _pokemon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pokemon */ "./src/store/pokemon.js");
 /* harmony import */ var _team__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./team */ "./src/store/team.js");
+/* harmony import */ var _botTeam__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./botTeam */ "./src/store/botTeam.js");
 
 
 
 
 
 
-const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_5__.configureStore)({
+
+const store = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_6__.configureStore)({
   middleware: defaultMiddleware => defaultMiddleware().concat((redux_logger__WEBPACK_IMPORTED_MODULE_0___default())),
   reducer: {
     auth: _auth__WEBPACK_IMPORTED_MODULE_1__["default"],
     user: _user__WEBPACK_IMPORTED_MODULE_2__["default"],
     pokemon: _pokemon__WEBPACK_IMPORTED_MODULE_3__["default"],
-    team: _team__WEBPACK_IMPORTED_MODULE_4__["default"]
+    team: _team__WEBPACK_IMPORTED_MODULE_4__["default"],
+    botTeam: _botTeam__WEBPACK_IMPORTED_MODULE_5__["default"]
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (store);
+
 
 
 
