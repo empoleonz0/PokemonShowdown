@@ -82,7 +82,6 @@ const team = createSlice({
                 action.payload.teamId = counter;
                 state.team.push(action.payload)
                 localStorage.counter = counter+1;
-                console.log(typeof localStorage.counter)
             }
         })
         .addCase(updatePokemon.fulfilled, (state, action) => {

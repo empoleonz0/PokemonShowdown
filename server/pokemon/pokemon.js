@@ -43,11 +43,11 @@ class Charizard extends Pokemon {
 
 class Blastoise extends Pokemon {
     constructor ([level, evs, ivs, moves, ability]) {
-        super(9, 'Blastoise', ['Water'], [79, 83, 100, 85, 105, 78], level, evs, ivs, ['Surf', 'Ice Beam'], moves ['Rain Dish', 'Torrent'], ability)
+        super(9, 'Blastoise', ['Water'], [79, 83, 100, 85, 105, 78], level, evs, ivs, ['Surf', 'Ice Beam'], moves, ['Rain Dish', 'Torrent'], ability)
     }
 }
 
-const defaultSettings = [100, [0, 0, 0, 0, 0, 0], [31, 31, 31, 31, 31, 31], [], []];
+const defaultSettings = [100, [0, 0, 0, 0, 0, 0], [31, 31, 31, 31, 31, 31], ['','','',''], ['']];
 
 const pokemon = [
     new Venusaur(defaultSettings),

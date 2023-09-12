@@ -6305,6 +6305,10 @@ const SinglePokemon = props => {
   const [spaEV, setSpaEV] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.evs[3]);
   const [spdEV, setSpdEV] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.evs[4]);
   const [speEV, setSpeEV] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.evs[5]);
+  const [move1, setMove1] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.moves[0]);
+  const [move2, setMove2] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.moves[1]);
+  const [move3, setMove3] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.moves[2]);
+  const [move4, setMove4] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(pokemon.moves[3]);
   const handleLevelChange = e => setLevel(e.target.value * 1);
   const handleHpEVChange = e => {
     if (e.target.value * 1 + atkEV + defEV + spaEV + spdEV + speEV <= 508) {
@@ -6336,6 +6340,28 @@ const SinglePokemon = props => {
       setSpeEV(e.target.value * 1);
     }
   };
+  const handleMove1Change = e => {
+    if (pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value) || e.target.value === '') {
+      setMove1(e.target.value);
+    }
+  };
+  const handleMove2Change = e => {
+    if (pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value) || e.target.value === '') {
+      setMove2(e.target.value);
+    } else {
+      console.log('stuff');
+    }
+  };
+  const handleMove3Change = e => {
+    if (pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value) || e.target.value === '') {
+      setMove3(e.target.value);
+    }
+  };
+  const handleMove4Change = e => {
+    if (pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value) || e.target.value === '') {
+      setMove4(e.target.value);
+    }
+  };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const updatedPokemon = {
       id: pokemon.id,
@@ -6355,57 +6381,73 @@ const SinglePokemon = props => {
         spd: Math.floor((2 * pokemon.basestats.spd + pokemon.ivs[4] + spdEV / 4) * level / 100 + 5),
         spe: Math.floor((2 * pokemon.basestats.spe + pokemon.ivs[5] + speEV / 4) * level / 100 + 5)
       },
-      moves: pokemon.moves,
+      moves: [move1, move2, move3, move4],
       ability: pokemon.ability,
       teamId: pokemon.teamId
     };
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.updatePokemon)(updatedPokemon));
-  }, [level, hpEV, defEV, spaEV, spdEV, speEV]);
+  }, [level, hpEV, defEV, spaEV, spdEV, speEV, move1, move2, move3, move4]);
   const deletepokemon = e => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.deletePokemon)(e.target.value));
   };
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Level:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pokemon.name), pokemon.types.map(type => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, type)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "Level:", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     min: "1",
     max: "100",
     value: level,
     onChange: handleLevelChange
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "TeamID: ", pokemon.teamId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "HP: ", pokemon.stats.hp, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "TeamID: ", pokemon.teamId), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "HP: ", pokemon.stats.hp, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     min: "0",
     max: "252",
     value: hpEV,
     onChange: handleHpEVChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ATK: ", pokemon.stats.atk, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "ATK: ", pokemon.stats.atk, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     min: "0",
     max: "252",
     value: atkEV,
     onChange: handleAtkEVChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "DEF: ", pokemon.stats.def, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "DEF: ", pokemon.stats.def, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     min: "0",
     max: "252",
     value: defEV,
     onChange: handleDefEVChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPA: ", pokemon.stats.spa, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "SPA: ", pokemon.stats.spa, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     min: "0",
     max: "252",
     value: spaEV,
     onChange: handleSpaEVChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPD: ", pokemon.stats.spd, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "SPD: ", pokemon.stats.spd, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     min: "0",
     max: "252",
     value: spdEV,
     onChange: handleSpdEVChange
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "SPE: ", pokemon.stats.spe, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "SPE: ", pokemon.stats.spe, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     type: "number",
     min: "0",
     max: "252",
     value: speEV,
     onChange: handleSpeEVChange
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "string",
+    defaultValue: move1,
+    onChange: handleMove1Change
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "string",
+    defaultValue: move2,
+    onChange: handleMove2Change
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "string",
+    defaultValue: move3,
+    onChange: handleMove3Change
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    type: "string",
+    defaultValue: move4,
+    onChange: handleMove4Change
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     value: pokemon.teamId,
     onClick: event => {
@@ -6798,7 +6840,6 @@ const team = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_0__.createSlice)({
         action.payload.teamId = counter;
         state.team.push(action.payload);
         localStorage.counter = counter + 1;
-        console.log(typeof localStorage.counter);
       }
     }).addCase(updatePokemon.fulfilled, (state, action) => {
       state.team = state.team.map(pokemon => pokemon.teamId === action.payload.teamId ? action.payload : pokemon);

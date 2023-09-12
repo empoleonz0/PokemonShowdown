@@ -16,6 +16,10 @@ const SinglePokemon = (props) =>{
     const [spaEV, setSpaEV] = useState(pokemon.evs[3])
     const [spdEV, setSpdEV] = useState(pokemon.evs[4])
     const [speEV, setSpeEV] = useState(pokemon.evs[5])
+    const [move1, setMove1] = useState(pokemon.moves[0])
+    const [move2, setMove2] = useState(pokemon.moves[1])
+    const [move3, setMove3] = useState(pokemon.moves[2])
+    const [move4, setMove4] = useState(pokemon.moves[3])
 
     const handleLevelChange = (e) => setLevel(e.target.value*1);
     const handleHpEVChange = (e) => {
@@ -48,6 +52,28 @@ const SinglePokemon = (props) =>{
             setSpeEV(e.target.value*1);
         }
     }
+    const handleMove1Change = (e) => {
+        if ((pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value)) || e.target.value==='') {
+            setMove1(e.target.value)
+        }
+    }
+    const handleMove2Change = (e) => {
+        if ((pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value)) || e.target.value==='') {
+            setMove2(e.target.value)
+        } else {
+            console.log('stuff')
+        }
+    }
+    const handleMove3Change = (e) => {
+        if ((pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value)) || e.target.value==='') {
+            setMove3(e.target.value)
+        }
+    }
+    const handleMove4Change = (e) => {
+        if ((pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value)) || e.target.value==='') {
+            setMove4(e.target.value)
+        }
+    }
 
     useEffect(() => {
         const updatedPokemon = {
@@ -68,12 +94,12 @@ const SinglePokemon = (props) =>{
                 spd: Math.floor((((2*pokemon.basestats.spd+pokemon.ivs[4]+spdEV/4)*level)/100+5)),
                 spe: Math.floor((((2*pokemon.basestats.spe+pokemon.ivs[5]+speEV/4)*level)/100+5)),
             },
-            moves: pokemon.moves,
+            moves: [move1, move2, move3, move4],
             ability: pokemon.ability,
             teamId: pokemon.teamId,
         }
         dispatch(updatePokemon(updatedPokemon));
-    }, [level, hpEV, defEV, spaEV, spdEV, speEV])
+    }, [level, hpEV, defEV, spaEV, spdEV, speEV, move1, move2, move3, move4])
 
     const deletepokemon = (e) => {
         dispatch(deletePokemon(e.target.value))
@@ -86,36 +112,42 @@ const SinglePokemon = (props) =>{
                 <span>{type}</span>
             ))}
             <div>
-                <p>
-                    Level:
-                    <input type="number" min="1" max="100" value = {level} onChange={handleLevelChange}></input>
-                </p>
+                Level:
+                <input type="number" min="1" max="100" value = {level} onChange={handleLevelChange}></input>
             </div>
-            <p>TeamID: {pokemon.teamId}</p>
-            <p>
-                HP: {pokemon.stats.hp}
-                <input type="number" min="0" max="252" value = {hpEV} onChange={handleHpEVChange}></input>
-            </p>
-            <p>
-                ATK: {pokemon.stats.atk}
-                <input type="number" min="0" max="252" value = {atkEV} onChange={handleAtkEVChange}></input>
-            </p>
-            <p>
-                DEF: {pokemon.stats.def}
-                <input type="number" min="0" max="252" value = {defEV} onChange={handleDefEVChange}></input>
-            </p>
-            <p>
-                SPA: {pokemon.stats.spa}
-                <input type="number" min="0" max="252" value = {spaEV} onChange={handleSpaEVChange}></input>
-            </p>
-            <p>
-                SPD: {pokemon.stats.spd}
-                <input type="number" min="0" max="252" value = {spdEV} onChange={handleSpdEVChange}></input>
-            </p>
-            <p>
-                SPE: {pokemon.stats.spe}
-                <input type="number" min="0" max="252" value = {speEV} onChange={handleSpeEVChange}></input>
-            </p>
+            <div>TeamID: {pokemon.teamId}</div>
+            <div>
+                <div>
+                    HP: {pokemon.stats.hp}
+                    <input type="number" min="0" max="252" value = {hpEV} onChange={handleHpEVChange}></input>
+                </div>
+                <div>
+                    ATK: {pokemon.stats.atk}
+                    <input type="number" min="0" max="252" value = {atkEV} onChange={handleAtkEVChange}/>
+                </div>
+                <div>
+                    DEF: {pokemon.stats.def}
+                    <input type="number" min="0" max="252" value = {defEV} onChange={handleDefEVChange}/>
+                </div>
+                <div>
+                    SPA: {pokemon.stats.spa}
+                    <input type="number" min="0" max="252" value = {spaEV} onChange={handleSpaEVChange}/>
+                </div>
+                <div>
+                    SPD: {pokemon.stats.spd}
+                    <input type="number" min="0" max="252" value = {spdEV} onChange={handleSpdEVChange}/>
+                </div>
+                <div>
+                    SPE: {pokemon.stats.spe}
+                    <input type="number" min="0" max="252" value = {speEV} onChange={handleSpeEVChange}/>
+                </div>
+            </div>
+            <div>
+                <input type="string" defaultValue={move1} onChange={handleMove1Change}/>
+                <input type="string" defaultValue={move2} onChange={handleMove2Change}/>
+                <input type="string" defaultValue={move3} onChange={handleMove3Change}/>
+                <input type="string" defaultValue={move4} onChange={handleMove4Change}/>
+            </div>
             <button value={pokemon.teamId} onClick={(event) => {deletepokemon(event)}}>Delete</button>
         </div>
     )
