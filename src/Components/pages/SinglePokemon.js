@@ -60,8 +60,6 @@ const SinglePokemon = (props) =>{
     const handleMove2Change = (e) => {
         if ((pokemon.movepool.includes(e.target.value) && !pokemon.moves.includes(e.target.value)) || e.target.value==='') {
             setMove2(e.target.value)
-        } else {
-            console.log('stuff')
         }
     }
     const handleMove3Change = (e) => {

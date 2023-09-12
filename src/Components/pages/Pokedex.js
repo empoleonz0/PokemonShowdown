@@ -1,11 +1,15 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../../store';
+import { logout, fetchPokemon } from '../../store';
 import { Link } from 'react-router-dom';
 
 const Pokedex = ()=> {
   const { pokemon } = useSelector(state => state);
   const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(fetchPokemon())
+  }, [dispatch])
 
   return (
     <div>

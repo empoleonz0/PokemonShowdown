@@ -6,11 +6,6 @@ const Home = ()=> {
   const { auth } = useSelector(state => state);
   const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(fetchPokemon())
-    dispatch(fetchTeam())
-  }, [dispatch])
-
   return (
     <div>
       <h1>Home</h1>

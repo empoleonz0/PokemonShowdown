@@ -17,12 +17,12 @@ class Pokemon {
         this.evs = evs;
         this.ivs = ivs;
         this.stats = {
-            hp: Math.floor((2*this.basestats.hp+ivs[0]+evs[0]/4)*level/100)+level+10,
-            atk: Math.floor((((2*this.basestats.atk+ivs[1]+evs[1]/4)*level)/100+5)),
-            def: Math.floor((((2*this.basestats.def+ivs[2]+evs[2]/4)*level)/100+5)),
-            spa: Math.floor((((2*this.basestats.spa+ivs[3]+evs[3]/4)*level)/100+5)),
-            spd: Math.floor((((2*this.basestats.spd+ivs[4]+evs[4]/4)*level)/100+5)),
-            spe: Math.floor((((2*this.basestats.spe+ivs[5]+evs[5]/4)*level)/100+5)),
+            hp: Math.floor((2*hp+ivs[0]+evs[0]/4)*level/100)+level+10,
+            atk: Math.floor((((2*atk+ivs[1]+evs[1]/4)*level)/100+5)),
+            def: Math.floor((((2*def+ivs[2]+evs[2]/4)*level)/100+5)),
+            spa: Math.floor((((2*spa+ivs[3]+evs[3]/4)*level)/100+5)),
+            spd: Math.floor((((2*spd+ivs[4]+evs[4]/4)*level)/100+5)),
+            spe: Math.floor((((2*spe+ivs[5]+evs[5]/4)*level)/100+5)),
         }
         this.moves = moves;
         this.ability = ability;
