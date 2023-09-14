@@ -6178,11 +6178,13 @@ __webpack_require__.r(__webpack_exports__);
 
 const Battle = () => {
   const {
+    team,
     botTeam
   } = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useSelector)(state => state);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchBotTeam)());
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
   }, [dispatch]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Bot Team"), JSON.stringify(botTeam));
 };

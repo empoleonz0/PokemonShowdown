@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, fetchBotTeam } from '../../store';
+import { logout, fetchTeam, fetchBotTeam } from '../../store';
 import { Link } from 'react-router-dom';
 
 const Battle = ()=> {
-  const { botTeam } = useSelector(state => state);
+  const { team, botTeam } = useSelector(state => state);
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(fetchBotTeam())
+    dispatch(fetchTeam())
   }, [dispatch])
 
   return (
