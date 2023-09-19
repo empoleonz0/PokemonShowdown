@@ -6,8 +6,8 @@ import { Link } from 'react-router-dom';
 const Battle = ()=> {
   const { team, botTeam } = useSelector(state => state);
   const [inBattle, setInBattle] = useState(false)
-  const teamCurrentHP = [];
-  const botTeamCurrentHP = [];
+  const [teamCurrentHP] = useState([]);
+  const [botTeamCurrentHP] = useState([]);
   const [switchedIn, setSwitchedIn] = useState(-1);
   const [botSwitchedIn, setBotSwitchedIn] = useState(-1);
   const dispatch = useDispatch();
@@ -45,7 +45,9 @@ const Battle = ()=> {
         { inBattle ? (
           <div>
             <h2>In battle</h2>
+            <div>{botTeamCurrentHP[botSwitchedIn]}/{botTeam[botSwitchedIn].stats.hp}</div>
             <div>{JSON.stringify(botTeam[botSwitchedIn])}</div>
+            <div>{teamCurrentHP[switchedIn]}/{team.team[switchedIn].stats.hp}</div>
             <div>{JSON.stringify(team.team[switchedIn])}</div>
           </div>
         ) : (
