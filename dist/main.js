@@ -6185,25 +6185,35 @@ const Battle = () => {
   const teamCurrentHP = [];
   const botTeamCurrentHP = [];
   const [switchedIn, setSwitchedIn] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(-1);
+  const [botSwitchedIn, setBotSwitchedIn] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(-1);
   const dispatch = (0,react_redux__WEBPACK_IMPORTED_MODULE_1__.useDispatch)();
-  const startbattle = () => {
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
+    dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchBotTeam)());
+  }, []);
+  const startbattle = e => {
     setInBattle(true);
     for (let i = 0; i < botTeam.length; i++) {
       if (team.team[i]) {
         teamCurrentHP.push(team.team[i].stats.hp);
+        if (e.target.value === team.team[i].name) {
+          setSwitchedIn(i);
+        }
       }
       botTeamCurrentHP.push(botTeam[i].stats.hp);
     }
     console.log(teamCurrentHP);
     console.log(botTeamCurrentHP);
+    console.log(switchedIn);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchBotTeam)());
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
   }, [dispatch]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Bot Team"), inBattle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "In battle") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Bot Team"), inBattle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "In battle") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Enemy Team"), botTeam.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, pokemon.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Your Team"), Object.keys(team).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, pokemon.name)), team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    value: pokemon.name,
     onClick: startbattle
-  }, "Start Battle"));
+  }, pokemon.name))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Error: no team"))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Battle);
 

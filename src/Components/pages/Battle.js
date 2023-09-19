@@ -8,19 +8,29 @@ const Battle = ()=> {
   const [inBattle, setInBattle] = useState(false)
   const teamCurrentHP = [];
   const botTeamCurrentHP = [];
-  const [switchedIn, setSwitchedIn] = useState(-1)
+  const [switchedIn, setSwitchedIn] = useState(-1);
+  const [botSwitchedIn, setBotSwitchedIn] = useState(-1);
   const dispatch = useDispatch();
 
-  const startbattle = () => {
+  useEffect(() => {
+    dispatch(fetchTeam());
+    dispatch(fetchBotTeam());
+  },[])
+
+  const startbattle = (e) => {
     setInBattle(true)
     for(let i=0;i<botTeam.length;i++) {
       if (team.team[i]) {
         teamCurrentHP.push(team.team[i].stats.hp)
+        if (e.target.value === team.team[i].name) {
+          setSwitchedIn(i);
+        }
       }
       botTeamCurrentHP.push(botTeam[i].stats.hp)
     }
     console.log(teamCurrentHP)
     console.log(botTeamCurrentHP)
+    console.log(switchedIn)
   }
 
   useEffect(()=>{
@@ -33,10 +43,30 @@ const Battle = ()=> {
         <h1>Bot Team</h1>
         { inBattle ? (
           <div>In battle</div>
-
         ) : (
-
-          <button onClick={startbattle}>Start Battle</button>
+          <div>
+            <div>
+              <p>Enemy Team</p>
+              {botTeam.map(pokemon => (
+                <p>{pokemon.name}</p>
+              ))}
+            </div>
+            <div>
+              <p>Your Team</p>
+              {Object.keys(team).length > 0 ? (
+                <div>
+                {team.team.map(pokemon => (
+                  <p>{pokemon.name}</p>
+                ))}
+                {team.team.map(pokemon => (
+                  <button value={pokemon.name} onClick={startbattle}>{pokemon.name}</button>
+                ))}
+                </div>
+              ) : (
+                <p>Error: no team</p>
+              )}
+            </div>
+          </div>
         )}
     </div>
   );
