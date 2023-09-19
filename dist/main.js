@@ -6192,6 +6192,7 @@ const Battle = () => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchBotTeam)());
   }, []);
   const startbattle = e => {
+    console.log(e.target.value);
     setInBattle(true);
     for (let i = 0; i < botTeam.length; i++) {
       if (team.team[i]) {
@@ -6202,15 +6203,15 @@ const Battle = () => {
       }
       botTeamCurrentHP.push(botTeam[i].stats.hp);
     }
+    setBotSwitchedIn(Math.floor(Math.random() * 6));
     console.log(teamCurrentHP);
     console.log(botTeamCurrentHP);
-    console.log(switchedIn);
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchBotTeam)());
     dispatch((0,_store__WEBPACK_IMPORTED_MODULE_2__.fetchTeam)());
   }, [dispatch]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Bot Team"), inBattle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "In battle") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Enemy Team"), botTeam.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, pokemon.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Your Team"), Object.keys(team).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, pokemon.name)), team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Bot Team"), inBattle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "In battle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, JSON.stringify(botTeam[botSwitchedIn])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, JSON.stringify(team.team[switchedIn]))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Enemy Team"), botTeam.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, pokemon.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Your Team"), Object.keys(team).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, pokemon.name)), team.team.map(pokemon => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     value: pokemon.name,
     onClick: startbattle
   }, pokemon.name))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Error: no team"))));

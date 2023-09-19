@@ -18,6 +18,7 @@ const Battle = ()=> {
   },[])
 
   const startbattle = (e) => {
+    console.log(e.target.value)
     setInBattle(true)
     for(let i=0;i<botTeam.length;i++) {
       if (team.team[i]) {
@@ -28,9 +29,9 @@ const Battle = ()=> {
       }
       botTeamCurrentHP.push(botTeam[i].stats.hp)
     }
+    setBotSwitchedIn(Math.floor(Math.random()*6))
     console.log(teamCurrentHP)
     console.log(botTeamCurrentHP)
-    console.log(switchedIn)
   }
 
   useEffect(()=>{
@@ -42,7 +43,11 @@ const Battle = ()=> {
     <div>
         <h1>Bot Team</h1>
         { inBattle ? (
-          <div>In battle</div>
+          <div>
+            <h2>In battle</h2>
+            <div>{JSON.stringify(botTeam[botSwitchedIn])}</div>
+            <div>{JSON.stringify(team.team[switchedIn])}</div>
+          </div>
         ) : (
           <div>
             <div>
